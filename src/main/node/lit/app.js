@@ -1,7 +1,9 @@
 2//imports
 var express = require('express');
-var app = express();
 var cors = require('cors');
+var app = express();
+app.use(cors());
+
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 require('./config/db');
@@ -13,7 +15,7 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
-app.use(cors());
+
 var playerCount = 0;
 
 //Socket connection
