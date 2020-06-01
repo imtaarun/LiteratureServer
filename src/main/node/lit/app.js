@@ -1,7 +1,9 @@
-//imports
+2 //imports
 var express = require('express');
-var app = express();
 var cors = require('cors');
+var app = express();
+app.use(cors());
+
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 require('./config/db');
@@ -100,6 +102,6 @@ function deal(req, res) {
 }
 
 //Listener
-http.listen(3000, () => {
-    console.log('started on port 3000');
+http.listen(8080, () => {
+    console.log('started on port 8080');
 });
