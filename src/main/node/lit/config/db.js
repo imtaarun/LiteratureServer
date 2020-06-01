@@ -6,10 +6,10 @@ var serverDb = 'mongodb+srv://AdminUser:Imacoder7@lit-s8rma.mongodb.net/test?ret
 mongo.connect(serverDb);
 
 var db = mongo.connection;
-db.on('error',function(){
-    console.log('DB connection fails');
+db.on('error', function(error) {
+    console.log('DB connection fails' + error);
 });
-db.once('open',function(){
+db.once('open', function() {
     console.log('DB connection Successful')
 });
 
