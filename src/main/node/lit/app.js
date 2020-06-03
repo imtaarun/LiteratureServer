@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ // to support URL-encoded bodies
 }));
 app.use(cors());
 var playerCount = 0;
+var joinedPlayers = [];
 
 //Socket connection
 io.on('connection', (socket) => {
@@ -28,13 +29,14 @@ io.on('connection', (socket) => {
             console.log('Player ' + playerCount + ' is disconnected');
         });
 
-        socket.on('room', (room) => {
+        socket.on('room', (name) => {
             if (playerCount < 7) {
                 var joinPlayer = require('./modules/join-player');
                 var join = joinPlayer.joinPlayers;
-                new join((playerCount), room);
-                console.log('Player ' + (playerCount) + ' has joined the room ' + room);
-                io.emit('room', { type: 'new-message', number: +(playerCount) });
+                new join((playerCount), name);
+                console.log('Player ' + (playerCount) + ' has joined the room ' + name);
+                joinedPlayers.push(name);
+                io.emit('room', { type: 'new-message', number: +(playerCount), joinedPlayers: joinedPlayers });
                 if ((playerCount) == 6) {
                     io.emit('start', { type: 'start-message', bool: true });
                     var randomDistribution = require('./modules/random-distribution');
