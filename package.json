@@ -9,6 +9,10 @@
   "keywords": [
     "literature"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imtaarun/LiteratureServer.git"
+  },
   "author": "taarun.dev",
   "license": "ISC",
   "bugs": {
